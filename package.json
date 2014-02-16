@@ -1,0 +1,32 @@
+{
+  "name": "node-connect-livereload",
+  "version": "0.0.0",
+  "description": "Start a file server with connect and connect-livereload to instantly preview your files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonkemp/node-connect-livereload"
+  },
+  "keywords": [
+    "connect",
+    "livereload"
+  ],
+  "author": "Jonathan Kemp <kempdogg@gmail.com> (http://jonkemp.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonkemp/node-connect-livereload/issues"
+  },
+  "homepage": "https://github.com/jonkemp/node-connect-livereload",
+  "devDependencies": {
+    "connect-livereload": "~0.3.2",
+    "open": "~0.0.4",
+    "tiny-lr": "~0.0.5",
+    "connect": "~2.13.0"
+  }
+}

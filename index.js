@@ -46,4 +46,4 @@ watch.createMonitor('./app/', function (monitor) {
     monitor.on('removed', function (f, stat) {
         // Handle removed files
     });
-})
+});

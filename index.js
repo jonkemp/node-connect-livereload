@@ -1,6 +1,6 @@
 var connect = require('connect'),
     http = require('http'),
-    open = require('open'),
+    opn = require('opn'),
     tinylr = require('tiny-lr'),
     watch = require('watch'),
     config = {
@@ -9,26 +9,21 @@ var connect = require('connect'),
         lr: 35729
     };
 
-var middleware = [
-    require('connect-livereload')({ port: config.lr }),
-    connect.static(config.app),
-    connect.directory(config.app)
-];
+var app = connect()
+    .use(require('connect-livereload')({ port: config.lr }))
+    .use(connect.static(config.app))
+    .use(connect.directory(config.app));
 
-var app = connect.apply(null, middleware);
-
-var server = http.createServer(app);
-
-server
+http.createServer(app)
     .listen(config.port)
     .on('listening', function() {
         console.log('Started connect web server on http://localhost:' + config.port + '.');
 
-        open('http://localhost:' + config.port);
+        opn('http://localhost:' + config.port);
     });
 
 tinylr().listen(config.lr, function(err) {
-    if(err) {
+    if (err) {
         return console.log(err);
     }
 });

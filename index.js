@@ -1,4 +1,8 @@
+'use strict';
+
 var connect = require('connect'),
+    serveStatic = require('serve-static'),
+    serveIndex = require('serve-index'),
     http = require('http'),
     opn = require('opn'),
     tinylr = require('tiny-lr'),
@@ -11,8 +15,8 @@ var connect = require('connect'),
 
 var app = connect()
     .use(require('connect-livereload')({ port: config.lr }))
-    .use(connect.static(config.app))
-    .use(connect.directory(config.app));
+    .use(serveStatic(config.app))
+    .use(serveIndex(config.app));
 
 http.createServer(app)
     .listen(config.port)
@@ -35,6 +39,7 @@ watch.createMonitor('./app/', function (monitor) {
     monitor.on('changed', function (f, curr, prev) {
         // Handle file changes
         http.get('http://localhost:' + config.lr + '/changed?files=' + f, function () {
+            console.log('File ' + f + ' was changed. Reloading.');
             console.log('Waiting...');
         });
     });
